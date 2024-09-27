@@ -1,0 +1,155 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2em;
+  text-align: center;
+}
+
+
+/* Helper */
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.clickable:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.v-space {
+  height: 1em;
+}
+
+.tj-sign {
+  background-color: black;
+  position: absolute;
+  left: 4em;
+  bottom: 4em;
+  width: 2em;
+  height: 2em;
+}
+
+
+/* Inputs */
+
+input {
+  background-color: white;
+  color: black;
+  padding: 0.2em;
+  border: 0;
+  border-radius: 0.4em;
+  -webkit-border-radius: 0.4em; /* WebKit */
+  -moz-border-radius: 0.4em;    /* Mozilla */
+  font-size: 1.1em;
+}
+
+input.error {
+  border: 0.15em solid red;
+}
+
+
+/* Table */
+
+table {
+  text-align: left;
+}
+
+thead {
+  background-color: #ffcf00;
+  color: black;
+}
+
+th {
+  padding: 0.2em;
+}
+
+th.padding-left:first-child {
+  padding-left: 2em;
+}
+
+td {
+  padding: 0.3em;
+}
+
+td.padding-left:first-child {
+  padding-left: 2em;
+}
+
+
+/* Modal */
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0,0,0,0.2);
+}
+
+.modal-window {
+  position: fixed;
+  left: 3em;
+  top: 6em;
+  right: 3em;
+  bottom: 3em;
+  background-color: black;
+  font: 2em;
+  border-radius: 1em;
+  -webkit-border-radius: 1em; /* WebKit */
+  -moz-border-radius: 1em;    /* Mozilla */
+  color: black;
+  overflow: hidden;
+}
+
+.modal-top-bar {
+  background-color: black;
+  color: white;
+  height: 3em;
+  line-height: 3em;
+  text-align: right;
+  padding: 0 1em;
+}
+
+.modal-top-bar-right {
+  background-color: transparent;
+}
+
+.modal-content {
+  padding: 2.5em;
+  display: flex;
+  gap: 1em;
+  overflow: scroll;
+  position: absolute;
+  bottom: 0;
+  top: 3em;
+  left: 0;
+  right: 0;
+  background-color: #ffc500;
+}
+
+@media (max-width: 900px) {
+  .modal-content {
+    flex-wrap: wrap;
+  }
+}
+
+.modal-content-column {
+  max-width: 450px;
+}
+
+.modal-content-column.grow {
+  flex-grow: 1;
+  font-size: 0.8em;
+  max-width: none;
+}
+
+
