@@ -89,7 +89,7 @@ const RateModal = ({ show, onClose, rate, effectiveDate }: PropsType) => {
     if (isNaN(parseFloat(amount)))
       updateAmountInCurrency('')
     else
-      updateAmountInCurrency(rate ? (parseFloat(amount) * rate.mid).toFixed(4) : 0)
+      updateAmountInCurrency(rate ? (parseFloat(amount) / rate.mid).toFixed(4) : 0)
     updateAmountInPLN(amount)
   }
 
@@ -99,7 +99,7 @@ const RateModal = ({ show, onClose, rate, effectiveDate }: PropsType) => {
     if (isNaN(parseFloat(amount)))
       updateAmountInPLN('')
     else
-      updateAmountInPLN(rate ? (parseFloat(amount) / rate.mid).toFixed(4) : 0)
+      updateAmountInPLN(rate ? (parseFloat(amount) * rate.mid).toFixed(4) : 0)
     updateAmountInCurrency(amount)
   }
 
