@@ -8,7 +8,6 @@ import { NBP_URL_TABLES as NBP_URL } from "../lib/lib"
 // helper
 const fetchData = async () => {
   const { data } = await axios.get(NBP_URL)
-  console.log(data)
   return data
 }
 
@@ -17,6 +16,9 @@ const fetchData = async () => {
 const Table = () => {
   const [selectedCurrencyCode, updateSelectedCurrencyCode] = useState<string>()
   const [rateModalShow, updateRateModalShow] = useState(false)
+
+
+  // handlers
 
   const onRateClick = (code: string) => {
     updateSelectedCurrencyCode(code)
@@ -28,20 +30,17 @@ const Table = () => {
   }
 
 
+  // use
+
   // call API
 
   const { data, error, isLoading } = useQuery<DataType, Error>(['current-rates'], fetchData)
-  console.log(data, error, isLoading)
 
   if (isLoading) return <div>Loading...</div>
   if (error) return <div>Error: {error.message}</div>
   const rates: RatesType = data![0]?.rates
   const effectiveDate: string = data![0]?.effectiveDate
 
-
-  // test
-
-  console.log(rates)
 
   // render
   return (

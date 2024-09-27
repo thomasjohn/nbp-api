@@ -21,31 +21,34 @@ type PropsType = {
 // helper
 const fetchData = async (rate: RateType, from: string, to: string) => {
   const url = NBP_URL + `${rate.code}/${from}/${to}`
-  console.log(url)
   const { data } = await axios.get(url)
-  console.log(data)
   return data
 }
 
 
 // main component
 const RateModal = ({ show, onClose, rate, effectiveDate }: PropsType) => {
-  console.log(show, onClose, rate)
-
   const [fromDate, updateFromDate] = useState<Date>(new Date())
   const [toDate, updateToDate] = useState<Date>(new Date())
   const [amountInPLN, updateAmountInPLN] = useState<number | string>(0)
   const [amountInCurrency, updateAmountInCurrency] = useState<number | string>(0)
 
 
-  const setInitialValues = () => {
-    // set dates
+  // helper
 
+  const getCurrentDate = () => {
     const currentDate = new Date()
     currentDate.setHours(0)
     currentDate.setMinutes(0)
     currentDate.setSeconds(0)
-    currentDate.setMilliseconds(0)
+    currentDate.setMilliseconds(0) 
+    return currentDate
+  }
+
+  const setInitialValues = () => {
+    // set dates
+
+    const currentDate = getCurrentDate()
 
     const pastDate = new Date(currentDate.getTime())
     pastDate.setDate(currentDate.getDate() - 30)
@@ -57,6 +60,7 @@ const RateModal = ({ show, onClose, rate, effectiveDate }: PropsType) => {
     updateAmountInCurrency(0)
     updateAmountInPLN(0)
   }
+
 
   // handlers
 
@@ -71,7 +75,11 @@ const RateModal = ({ show, onClose, rate, effectiveDate }: PropsType) => {
   }
 
   const onToDateChange = (date: Date | null) => {
-    if (date && date.getTime() >= fromDate.getTime())
+    const currentDate = getCurrentDate()
+    const maxDate = new Date(currentDate.getTime())
+    maxDate.setDate(currentDate.getDate() +1)
+
+    if (date && date.getTime() >= fromDate.getTime() && date.getTime()<maxDate.getTime())
       updateToDate(date)
   }
 
@@ -95,6 +103,9 @@ const RateModal = ({ show, onClose, rate, effectiveDate }: PropsType) => {
     updateAmountInCurrency(amount)
   }
 
+  
+  // use
+
   // show state changed
   useMemo(() => {
     if (show) {
@@ -103,15 +114,12 @@ const RateModal = ({ show, onClose, rate, effectiveDate }: PropsType) => {
     }
   }, [show])
 
-  console.log(convertDate(fromDate), convertDate(toDate))
-
 
   // call API
 
   const { data, error, isLoading } = useQuery<CurrencyDataType, Error>(['range-rates', rate, convertDate(fromDate), convertDate(toDate)], async () => await fetchData(rate!, convertDate(fromDate), convertDate(toDate)), {
     enabled: !!rate,
   })
-  console.log(data, error, isLoading)
 
   if (isLoading || data === null) return <div>Loading...</div>
   if (error) return <div>Error: {error.message}</div>
@@ -120,11 +128,6 @@ const RateModal = ({ show, onClose, rate, effectiveDate }: PropsType) => {
     return null
 
   const rates: CurrencyRatesType = data?.rates
-
-
-  // test
-
-  console.log(rate, rates)
 
 
   // render

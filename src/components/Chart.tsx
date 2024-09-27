@@ -38,7 +38,7 @@ const getValuesRange = (data: ChartDataType) => {
 
 // main component
 const ChartComponent = ({ data = defaultDdata }: PropsType) => {
-
+  // render
   return (
     <ResponsiveContainer width="100%" height="100%">
       <LineChart data={data}>

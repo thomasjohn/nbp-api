@@ -4,6 +4,7 @@ import Table from './components/Table'
 import "react-datepicker/dist/react-datepicker.css"
 import './App.css'
 
+
 // main component
 function App() {
   const queryClient = new QueryClient();
