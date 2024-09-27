@@ -9,11 +9,11 @@
 /* Helper */
 
 .show {
-  display: block;
+  visibility: visible;
 }
 
 .hide {
-  display: none;
+  visibility: hidden;
 }
 
 .clickable {
